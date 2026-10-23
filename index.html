@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="양무리 보고서">
+<meta name="theme-color" content="#DCE8D6">
+<title>양무리 보고서</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23DCE8D6'/%3E%3Cg fill='%23fff' stroke='%2393A98A' stroke-width='2'%3E%3Ccircle cx='38' cy='54' r='13'/%3E%3Ccircle cx='52' cy='48' r='14'/%3E%3Ccircle cx='64' cy='56' r='12'/%3E%3Ccircle cx='48' cy='62' r='13'/%3E%3C/g%3E%3Cellipse cx='72' cy='46' rx='8' ry='9' fill='%233E4A3F'/%3E%3Crect x='42' y='70' width='4' height='10' rx='2' fill='%233E4A3F'/%3E%3Crect x='58' y='70' width='4' height='10' rx='2' fill='%233E4A3F'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23DCE8D6'/%3E%3Cg fill='%23fff' stroke='%2393A98A' stroke-width='2'%3E%3Ccircle cx='38' cy='54' r='13'/%3E%3Ccircle cx='52' cy='48' r='14'/%3E%3Ccircle cx='64' cy='56' r='12'/%3E%3Ccircle cx='48' cy='62' r='13'/%3E%3C/g%3E%3Cellipse cx='72' cy='46' rx='8' ry='9' fill='%233E4A3F'/%3E%3Crect x='42' y='70' width='4' height='10' rx='2' fill='%233E4A3F'/%3E%3Crect x='58' y='70' width='4' height='10' rx='2' fill='%233E4A3F'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<style>
+  :root{
+    --cream:#FBF7EF; --paper:#FFFFFF; --meadow:#DCE8D6; --olive:#4F6B4A; --deep:#2F4430;
+    --honey:#D9A441; --honeyDeep:#B9832A; --clay:#C0705A; --clayBg:#F7E6E0;
+    --ink:#2B2A26; --mute:#7A7A6E; --line:#ECE5D6;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--cream);color:var(--ink);
+    font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.55}
+  .serif{font-family:"Gowun Batang",serif}
+
+  /* 머리 그림 */
+  .hero{position:relative;background:linear-gradient(180deg,#EAF2E4 0%,var(--meadow) 100%);
+        padding:calc(22px + env(safe-area-inset-top)) 20px 0;overflow:hidden}
+  .hero-in{max-width:560px;margin:0 auto;position:relative;z-index:1}
+  .hero .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .badge{display:inline-block;font-size:13px;font-weight:700;color:var(--olive);background:rgba(255,255,255,.7);
+         padding:4px 11px;border-radius:999px;letter-spacing:.2px}
+  .hero h1{margin:10px 0 2px;font-family:"Gowun Batang",serif;font-size:28px;font-weight:700;color:var(--deep);letter-spacing:-.3px;line-height:1.3}
+  .hero .sub{margin:0;color:var(--olive);font-size:15px}
+  .verse{margin:14px 0 0;font-family:"Gowun Batang",serif;font-size:14.5px;color:#5C6B57;line-height:1.6}
+  .verse b{font-weight:400;color:var(--mute);font-size:13px;margin-left:4px}
+  .hill{display:block;width:100%;height:92px;margin-top:6px}
+  .gear{flex:none;font:inherit;font-size:14px;font-weight:600;background:rgba(255,255,255,.8);border:none;border-radius:999px;
+        padding:8px 13px;color:var(--deep);box-shadow:0 1px 3px rgba(47,68,48,.12)}
+
+  .wrap{max-width:560px;margin:-18px auto 0;padding:0 14px 150px;position:relative;z-index:2}
+  .card{background:var(--paper);border-radius:22px;padding:20px 18px;margin-bottom:14px;
+        box-shadow:0 1px 2px rgba(60,50,30,.05),0 6px 18px rgba(60,50,30,.06)}
+  .card h2{margin:0 0 2px;font-family:"Gowun Batang",serif;font-size:20px;font-weight:700;color:var(--deep);display:flex;align-items:center;gap:8px}
+  .card h2 .ic{font-size:20px}
+  .card .hint{margin:0 0 14px;color:var(--mute);font-size:14.5px}
+  label.f{display:block;font-weight:700;margin:16px 0 7px;font-size:15.5px;color:var(--deep)}
+  label.f:first-of-type{margin-top:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;
+        background:#FDFBF6;color:var(--ink);-webkit-appearance:none;appearance:none}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%234F6B4A' stroke-width='2'/%3E%3C/svg%3E");
+        background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+  textarea{min-height:180px;resize:vertical;line-height:1.7}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--honey);box-shadow:0 0 0 4px rgba(217,164,65,.18)}
+
+  /* 출석 */
+  .sub-h{display:flex;align-items:baseline;justify-content:space-between;margin:18px 0 9px;font-weight:700;font-size:15.5px;color:var(--deep)}
+  .sub-h:first-of-type{margin-top:6px}
+  .sub-h small{font-weight:500;color:var(--mute);font-size:13px}
+  .names{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:7px;padding:10px 15px 10px 12px;border:1.5px solid var(--line);border-radius:999px;
+        background:#fff;font-size:16.5px;font-weight:600;color:#55554C;user-select:none;transition:background .15s,border-color .15s,color .15s}
+  .chip input{position:absolute;opacity:0;width:1px;height:1px}
+  .chip::before{content:"";width:18px;height:18px;border-radius:50%;border:1.5px solid #CFC8B8;background:#fff;flex:none;
+        display:grid;place-items:center;font-size:12px;line-height:1;color:#fff}
+  .chip.on{background:#EEF4EA;border-color:#B7CBAE;color:var(--deep)}
+  .chip.on::before{content:"✓";background:var(--olive);border-color:var(--olive)}
+  .chip.out.on{background:var(--clayBg);border-color:#E5BFB2;color:#8A4535}
+  .chip.out.on::before{background:var(--clay);border-color:var(--clay)}
+  .chip:focus-within{box-shadow:0 0 0 3px rgba(217,164,65,.35)}
+  .srow{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px dashed var(--line)}
+  .srow:first-child{border-top:none;padding-top:2px}
+  .srow .nm{flex:1;font-weight:700;font-size:17px}
+  .divider{height:1px;background:var(--line);margin:18px -18px 4px}
+
+  /* 미리보기 */
+  .count{display:flex;gap:8px;margin-bottom:12px}
+  .count div{flex:1;background:#F6F2E8;border-radius:14px;padding:10px 12px}
+  .count b{display:block;font-size:22px;color:var(--deep);font-weight:800;line-height:1.2}
+  .count span{font-size:13px;color:var(--mute)}
+  #preview{white-space:pre-line;font-size:15.5px;color:#4A4A42;line-height:1.75}
+
+  .bar{position:fixed;z-index:20;left:0;right:0;bottom:0;padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+       background:linear-gradient(180deg,rgba(251,247,239,0) 0%,var(--cream) 35%)}
+  .bar button{display:block;width:100%;max-width:532px;margin:0 auto;font:inherit;font-size:19px;font-weight:800;padding:17px;border:none;
+       border-radius:18px;background:linear-gradient(180deg,var(--honey),var(--honeyDeep));color:#fff;letter-spacing:.2px;
+       box-shadow:0 6px 16px rgba(185,131,42,.35)}
+  .bar button:active{transform:translateY(1px)}
+  .note{font-size:14.5px;color:var(--mute);margin:6px 8px 0;text-align:center;line-height:1.65}
+  .note b{color:var(--deep)}
+  .msg{color:var(--clay);font-weight:700;font-size:15px;min-height:22px;margin-top:10px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="sheep">
+      <g fill="#fff" stroke="#B9C7B0" stroke-width="1.4">
+        <circle cx="10" cy="14" r="8"/><circle cx="20" cy="9" r="9"/><circle cx="30" cy="14" r="8"/><circle cx="20" cy="18" r="8"/>
+      </g>
+      <ellipse cx="37" cy="10" rx="5.5" ry="6.5" fill="#3E4A3F"/>
+      <rect x="13" y="22" width="3" height="7" rx="1.5" fill="#3E4A3F"/><rect x="25" y="22" width="3" height="7" rx="1.5" fill="#3E4A3F"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- 설정 화면 -->
+<div class="hidden" id="setup">
+  <div class="hero"><div class="hero-in">
+    <span class="badge">여의도침례교회 7교구</span>
+    <h1>양무리 보고서</h1>
+    <p class="sub">처음 한 번만 적어 두면 매주 이어서 씁니다</p>
+    <svg class="hill" viewBox="0 0 400 92" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <path d="M0 60 Q90 20 200 52 T400 40 V92 H0Z" fill="#C9DCC0"/>
+      <path d="M0 78 Q120 48 240 72 T400 66 V92 H0Z" fill="#B6CFAB"/>
+      <use href="#sheep" x="268" y="22"/>
+    </svg>
+  </div></div>
+  <div class="wrap">
+    <div class="card">
+      <h2><span class="ic">🌿</span>우리 양무리</h2>
+      <label class="f" for="sFlock">양무리</label>
+      <select id="sFlock"></select>
+      <label class="f" for="sReporter">보고자 (내 이름)</label>
+      <input id="sReporter" type="text" autocomplete="name">
+      <label class="f" for="sEmail">이메일 (보고서 사본 받을 주소)</label>
+      <input id="sEmail" type="email" autocomplete="email" inputmode="email">
+      <label class="f" for="sPlace">모임 장소</label>
+      <input id="sPlace" type="text" placeholder="예) 511호">
+    </div>
+    <div class="card">
+      <h2><span class="ic">🐑</span>양무리 식구</h2>
+      <p class="hint">한 줄에 한 명씩 적어 주세요.</p>
+      <textarea id="sMembers" placeholder="홍길동&#10;김철수&#10;이영희"></textarea>
+      <div class="msg" id="sMsg"></div>
+    </div>
+    <p class="note">🔒 적은 내용은 이 휴대폰에만 저장되고<br>다른 곳으로 보내지지 않습니다.</p>
+  </div>
+  <div class="bar"><button type="button" id="sSave">저장하고 시작하기</button></div>
+</div>
+
+<!-- 매주 화면 -->
+<div class="hidden" id="main">
+  <div class="hero"><div class="hero-in">
+    <div class="top">
+      <span class="badge" id="badge">여의도침례교회 7교구</span>
+      <button class="gear" type="button" id="toSetup">⚙️ 설정</button>
+    </div>
+    <h1 id="title">양무리 보고서</h1>
+    <p class="sub" id="who"></p>
+    <p class="verse">“서로 돌아보아 사랑과 선행을 격려하며”<b>히브리서 10:24</b></p>
+    <svg class="hill" viewBox="0 0 400 92" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <path d="M0 60 Q90 20 200 52 T400 40 V92 H0Z" fill="#C9DCC0"/>
+      <path d="M0 78 Q120 48 240 72 T400 66 V92 H0Z" fill="#B6CFAB"/>
+      <use href="#sheep" x="250" y="24"/>
+      <use href="#sheep" x="238" y="36" transform="translate(600 0) scale(-1 1)"/>
+    </svg>
+  </div></div>
+
+  <div class="wrap">
+    <div class="card">
+      <h2><span class="ic">🗓️</span>모임 날짜</h2>
+      <input id="date" type="date" style="margin-top:10px" aria-label="모임 날짜">
+    </div>
+
+    <div class="card">
+      <h2><span class="ic">⛪</span>주일예배</h2>
+      <p class="hint">출석 체크를 풀면 결석자로 옮겨 갑니다.</p>
+      <div class="sub-h">출석자 <small>현장 · 온라인</small></div>
+      <div id="gSunIn"></div>
+      <div class="sub-h">결석자</div>
+      <div class="names" id="gSunOut"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ic">🐑</span>양무리 모임</h2>
+      <p class="hint">출석 체크를 풀면 결석자로 옮겨 갑니다.</p>
+      <div class="sub-h">출석자</div>
+      <div class="names" id="gGrpIn"></div>
+      <div class="sub-h">결석자</div>
+      <div class="names" id="gGrpOut"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ic">💝</span>양무리 헌금</h2>
+      <p class="hint">있을 때만 적어 주세요.</p>
+      <input id="offering" type="text" inputmode="numeric" placeholder="예) 30,000원" aria-label="양무리 헌금">
+    </div>
+
+    <div class="card">
+      <h2><span class="ic">📋</span>보고서에 들어갈 내용</h2>
+      <div class="count" style="margin-top:12px">
+        <div><b id="cSun"></b><span>주일예배 출석</span></div>
+        <div><b id="cGrp"></b><span>양무리 출석</span></div>
+      </div>
+      <div id="preview"></div>
+    </div>
+
+    <p class="note">보고서가 열리면 <b>결석자 전화심방</b>과 <b>기도제목</b>만 적고<br>「제출」을 눌러 주세요 🙏</p>
+  </div>
+  <div class="bar"><button type="button" id="go">보고서 열기</button></div>
+</div>
+
+<script>
+const FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSd0ziErSiy46rZuXFgUC7Rc4_VF1SebNVKIntjRqjeAXU5ucg/viewform';
+const E = { date:'1740157490', place:'1000813610', reporter:'1278309640', flock:'80841486',
+            sunIn:'1876371967', sunOut:'1654273751', grpIn:'149085632', grpOut:'918469759', offering:'505911271' };
+const FLOCKS = ['7-01(이진용/김희순 목자)','7-02(이상만/김은순 목자)','7-03(박일호/이 순 목자)','7-04(이강현/박희옥 목자)',
+ '7-05(오세백/김미애a 목자)','7-06(신성현/안승희 목자)','7-07(이요열/류미영 목자)','7-08(김동현/박주희 목자)',
+ '7-09(이원석/김혜선 목자)','7-31(탁우빈/권아름 목자)-젊은부부','7-10(송여선 목자)','7-11(김은순 목자)','7-12(조윤정 목자)',
+ '7-13(김미애b 목자)','7-14(김명희 목자)','7-15(김은주 목자)','7-16(조인숙 목자)','7-17(전애리 목자)','7-19(강미라 목자)',
+ '7-20(조혜정 목자)','7-22(강옥경 목자)','7-23(이희정 목자)','7-24(조선아 목자)','7-25(황재경 목자)','7-26(송해경 목자)',
+ '7-27(안현상 목자)-형제1','7-28(이금호 목자)','7-29(정성윤 목자)','7-30(정수경 목자)','7-32(장지훈 목자)-형제2',
+ '7-33(정하리 목자)','7-34(박지예 목자)','기타 양무리'];
+const KEY = 'flock_report_v1';
+const $ = id => document.getElementById(id);
+
+let cfg = null;
+try { cfg = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
+const saveCfg = () => { try { localStorage.setItem(KEY, JSON.stringify(cfg)); } catch(e) {} };
+
+// ---------- 설정 ----------
+const sel = $('sFlock');
+sel.innerHTML = '<option value="">선택해 주세요</option>' + FLOCKS.map(f => '<option>' + f + '</option>').join('');
+function showSetup() {
+  const c = cfg || {};
+  sel.value = c.flock || ''; $('sReporter').value = c.reporter || ''; $('sEmail').value = c.email || '';
+  $('sPlace').value = c.place || ''; $('sMembers').value = (c.members || []).join('\n'); $('sMsg').textContent = '';
+  $('main').classList.add('hidden'); $('setup').classList.remove('hidden'); window.scrollTo(0,0);
+}
+$('sSave').onclick = () => {
+  const members = $('sMembers').value.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+  const c = { flock: sel.value, reporter: $('sReporter').value.trim(), email: $('sEmail').value.trim(),
+              place: $('sPlace').value.trim(), members };
+  const miss = [];
+  if (!c.flock) miss.push('양무리'); if (!c.reporter) miss.push('보고자');
+  if (!/^\S+@\S+\.\S+$/.test(c.email)) miss.push('이메일'); if (!c.place) miss.push('모임 장소');
+  if (!members.length) miss.push('식구 이름');
+  if (miss.length) { $('sMsg').textContent = '빠진 항목: ' + miss.join(', '); return; }
+  cfg = c; saveCfg(); showMain();
+};
+$('toSetup').onclick = showSetup;
+
+// ---------- 매주 ----------
+let att = [];
+function showMain() {
+  const m = cfg.flock.match(/^(\d+)-(\d+)\((.+?)\)/);
+  $('title').textContent = m ? m[1] + '-' + m[2] + ' 양무리' : cfg.flock;
+  $('who').textContent = (m ? m[3] + ' · ' : '') + '보고자 ' + cfg.reporter + ' · ' + cfg.place;
+  att = cfg.members.map(() => ({ sun:'현장', grp:'출석' }));
+  $('setup').classList.add('hidden'); $('main').classList.remove('hidden'); window.scrollTo(0,0);
+  renderPeople();
+}
+function chip(text, checked, onChange, out) {
+  const l = document.createElement('label'); l.className = 'chip' + (out ? ' out' : '') + (checked ? ' on' : '');
+  const c = document.createElement('input'); c.type = 'checkbox'; c.checked = checked;
+  c.addEventListener('change', () => onChange(c.checked));
+  l.append(c, document.createTextNode(text));
+  return l;
+}
+function renderPeople() {
+  ['gSunIn','gSunOut','gGrpIn','gGrpOut'].forEach(id => $(id).innerHTML = '');
+  cfg.members.forEach((n, i) => {
+    const a = att[i];
+    const row = document.createElement('div'); row.className = 'srow';
+    const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = n;
+    row.append(nm,
+      chip('현장', a.sun === '현장', on => { a.sun = on ? '현장' : '결석'; renderPeople(); }),
+      chip('온라인', a.sun === '온라인', on => { a.sun = on ? '온라인' : '결석'; renderPeople(); }));
+    $('gSunIn').appendChild(row);
+    $('gSunOut').appendChild(chip(n, a.sun === '결석', on => { a.sun = on ? '결석' : '현장'; renderPeople(); }, true));
+    $('gGrpIn').appendChild(chip(n, a.grp === '출석', on => { a.grp = on ? '출석' : '결석'; renderPeople(); }));
+    $('gGrpOut').appendChild(chip(n, a.grp === '결석', on => { a.grp = on ? '결석' : '출석'; renderPeople(); }, true));
+  });
+  preview();
+}
+function fields() {
+  const who = pick => cfg.members.filter((n, i) => pick(att[i])).join(', ');
+  const onsite = who(a => a.sun === '현장'), online = who(a => a.sun === '온라인');
+  return {
+    sunIn: [onsite && ('현장 - ' + onsite), online && ('온라인 - ' + online)].filter(Boolean).join(' / '),
+    sunOut: who(a => a.sun === '결석') || '없음',
+    grpIn: who(a => a.grp === '출석'),
+    grpOut: who(a => a.grp === '결석') || '없음',
+  };
+}
+function preview() {
+  const f = fields();
+  const n = cfg.members.length;
+  $('cSun').textContent = att.filter(a => a.sun !== '결석').length + ' / ' + n;
+  $('cGrp').textContent = att.filter(a => a.grp === '출석').length + ' / ' + n;
+  $('preview').textContent = '주일예배 출석: ' + (f.sunIn || '없음') + '\n주일예배 결석: ' + f.sunOut +
+    '\n양무리 출석: ' + (f.grpIn || '없음') + '\n양무리 결석: ' + f.grpOut;
+}
+function buildUrl() {
+  const f = fields();
+  const p = new URLSearchParams({ usp:'pp_url', emailAddress: cfg.email });
+  p.set('entry.' + E.date, $('date').value);
+  p.set('entry.' + E.place, cfg.place);
+  p.set('entry.' + E.reporter, cfg.reporter);
+  p.set('entry.' + E.flock, cfg.flock);
+  if (f.sunIn) p.set('entry.' + E.sunIn, f.sunIn);
+  p.set('entry.' + E.sunOut, f.sunOut);
+  if (f.grpIn) p.set('entry.' + E.grpIn, f.grpIn);
+  p.set('entry.' + E.grpOut, f.grpOut);
+  const off = $('offering').value.trim(); if (off) p.set('entry.' + E.offering, off);
+  return FORM + '?' + p.toString();
+}
+$('go').onclick = () => { location.href = buildUrl(); };
+
+const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+$('date').value = d.toISOString().slice(0,10);
+if (cfg && cfg.flock && cfg.members && cfg.members.length) showMain(); else showSetup();
+</script>
+</body>
+</html>
